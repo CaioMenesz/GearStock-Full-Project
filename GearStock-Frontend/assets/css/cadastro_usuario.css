@@ -1,0 +1,19 @@
+/* assets/css/styles.css (Adicionar ao final) */
+
+/* Layout de Coluna Única (Para Cadastro de Usuário) */
+.form-card.one-column-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Apenas uma coluna */
+    gap: 10px; 
+}
+
+/* Garante que o botão ocupe toda a largura mesmo em coluna única */
+.form-card.one-column-grid .full-width-button {
+    grid-column: 1 / 1; 
+}
+
+/* Opcional: Limitar a largura do formulário de usuário para centralizar melhor */
+.form-container {
+    max-width: 500px; /* Reduzindo a largura máxima para formulários de coluna única */
+    margin: 0 auto;
+}

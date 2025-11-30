@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEARSTOCK | Dashboard</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="dark-mode"> 
+    
+    <aside class="sidebar">
+        <div class="logo">GEARSTOCK</div>
+        <nav>
+            <a href="dashboard.html" class="active"><i class="fas fa-home"></i> Dashboard</a>
+            <a href="listagem_peca.html"><i class="fas fa-boxes"></i> Peças</a>
+            <a href="cadastro_peca.html"><i class="fas fa-plus-circle"></i> Cadastrar Peça</a>
+            <a href="edicao_peca.html"><i class="fas fa-pen-to-square"></i> Atualizar Cadastro de Peça</a>
+            <a href="listagem_usuario.html"><i class="fas fa-users"></i> Usuários</a>
+            <a href="cadastro_usuario.html"><i class="fas fa-user-plus"></i> Cadastrar Usuário</a>
+            <a href="edicao_usuario.html"><i class="fas fa-user-plus"></i> Edição de Usuário</a>
+            <a href="registro_entrada_peca.html"><i class="fas fa-truck-loading"></i> Entrada de Peças</a>
+            <a href="registro_saida_peca.html"><i class="fas fa-truck-loading"></i> Saída de Peças</a>
+            <a href="historico_movimentacoes.html"><i class="fas fa-history"></i> Histórico Movimentações</a>
+            
+            <a href="login.html" class="logout-link">
+                <i class="fas fa-sign-out-alt"></i> Sair
+            </a>
+        </nav>
+    </aside>
+
+    <main class="content-area">
+        <header class="page-header">
+            <h1 id="welcomeMessage">Seja bem vindo, {usuário}</h1>
+            <button id="mode-toggle" class="btn btn-icon">
+                <i class="fas fa-sun"></i> 
+            </button>
+        </header>
+
+        <section class="dashboard-metrics">
+            
+            <div class="metric-card primary-color-bg">
+                <p class="metric-label">Vendas</p>
+                <p class="metric-value" id="metricVendas">R$ 1.200,00</p>
+            </div>
+
+            <div class="metric-card primary-color-bg">
+                <p class="metric-label">Compras</p>
+                <p class="metric-value" id="metricCompras">R$ 800,00</p>
+            </div>
+
+            <div class="metric-card primary-color-bg">
+                <p class="metric-label">Saldo</p>
+                <p class="metric-value" id="metricSaldo">R$ 400,00</p>
+            </div>
+            
+        </section>
+        
+        <section class="quick-navigation">
+            
+            <a href="listagem_peca.html" class="nav-button dark-bg-button">
+                Peças
+            </a>
+            
+            <a href="historico_movimentacoes.html" class="nav-button dark-bg-button">
+                Movimentações
+            </a>
+            
+            <a href="listagem_usuario.html" class="nav-button dark-bg-button">
+                Usuários
+            </a>
+            
+        </section>
+    </main>
+    
+    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/dashboard.js"></script> </body>
+</html>

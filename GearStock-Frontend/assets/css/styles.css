@@ -1,0 +1,597 @@
+/* ==================================== */
+/* 1. VARIÁVEIS DE COR E TEMA (Dark/Light Mode) */
+/* ==================================== */
+
+:root {
+    /* Modo Claro Padrão */
+    --bg-color: #f4f6f9;
+    --card-bg: white;
+    --text-color: #333;
+    --sidebar-bg: #1f2937;
+    --input-bg: #f8f8f8;
+    --primary-color: #ff9800; /* Laranja do protótipo */
+    --secondary-text: #666;
+    --border-color: #ddd;
+    --table-alt-row: #fcfcfc; /* Cor alternativa suave para tabelas */
+    --input-bg-hover: #f0f0f0; /* Cor de hover/seleção clara */
+}
+
+/* Modo Escuro (Aplicado ao body.dark-mode) */
+body.dark-mode {
+    --bg-color: #121212;
+    --card-bg: #1f1f1f;
+    --text-color: #e0e0e0;
+    --sidebar-bg: #000000;
+    --input-bg: #333;
+    --secondary-text: #aaa;
+    --border-color: #444;
+    --table-alt-row: #292929; /* Cor alternativa suave para tabelas escuras */
+    --input-bg-hover: #333; /* Cor de hover/seleção escura */
+}
+
+/* Classes de Cor Auxiliares */
+.primary-color-bg {
+    background-color: var(--primary-color) !important;
+    color: black !important; /* Força texto preto no fundo laranja */
+}
+
+
+/* ==================================== */
+/* 2. ESTILO GLOBAL E ESTRUTURA DE LAYOUT */
+/* ==================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex; /* Habilita layout com sidebar e área de conteúdo */
+    min-height: 100vh;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-bg);
+    color: white;
+    padding: 20px 0;
+    flex-shrink: 0;
+}
+.sidebar .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 0 20px;
+    color: var(--primary-color);
+}
+.sidebar nav a {
+    display: flex; /* Adicionado flex para alinhar ícone e texto */
+    align-items: center;
+    padding: 12px 20px;
+    color: #ccc;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+.sidebar nav a i {
+    margin-right: 10px;
+    width: 20px; /* Garante alinhamento dos ícones */
+}
+.sidebar nav a:hover,
+.sidebar nav a.active {
+    background-color: #ff98001a; /* Laranja com transparência */
+    color: var(--primary-color);
+    border-left: 5px solid var(--primary-color);
+    padding-left: 15px; /* Ajusta padding após a borda */
+}
+
+/* --- Área de Conteúdo Principal --- */
+.content-area {
+    flex-grow: 1;
+    padding: 30px;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color); /* Separador visual */
+}
+.page-header h1 {
+    font-size: 1.8em;
+    color: var(--text-color);
+}
+
+
+/* ==================================== */
+/* 3. ESTILOS DE FORMULÁRIO E INPUTS */
+/* ==================================== */
+
+.form-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.form-card {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    color: var(--secondary-text);
+}
+
+.input-group input, 
+.input-group select, 
+.input-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    transition: border-color 0.2s;
+}
+
+.input-group input:focus, 
+.input-group select:focus, 
+.input-group textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+/* Aplica o estilo de input do protótipo no Modo Escuro (fundo preto) */
+.dark-mode .input-group input, 
+.dark-mode .input-group select, 
+.dark-mode .input-group textarea {
+    border-color: #555;
+    background-color: #333;
+}
+
+/* Layout de Duas Colunas (Cadastro de Peças) */
+.form-card.two-column-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px; 
+}
+.form-card.two-column-grid .input-group {
+    margin-bottom: 0;
+}
+
+
+/* ==================================== */
+/* 4. BOTÕES E FEEDBACK */
+/* ==================================== */
+
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: opacity 0.2s, background-color 0.2s;
+}
+
+.btn:hover:not(:disabled) {
+    opacity: 0.9;
+}
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+.btn-primary.btn-orange {
+    grid-column: 1 / 3; /* Faz o botão ocupar as duas colunas no grid */
+    background-color: var(--primary-color);
+    color: black;
+    padding: 15px;
+    font-size: 1.1em;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-icon {
+    background: none;
+    color: var(--text-color);
+    font-size: 1.2em;
+    padding: 5px;
+}
+
+.feedback-message {
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* ==================================== */
+/* 5. ESTILOS DE LISTAGEM (TOOLBAR, FILTROS E AÇÕES) */
+/* ==================================== */
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.filter-group {
+    display: flex;
+    gap: 10px;
+    flex-grow: 1; /* Permite que os selects ocupem mais espaço */
+}
+
+.action-group {
+    display: flex;
+    gap: 10px;
+}
+
+.action-group .btn {
+    padding: 10px 15px;
+    font-size: 1em;
+    font-weight: 600;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Estilo dos Filtros (Selects em Amarelo/Laranja) */
+.filter-select {
+    /* Sobrepõe estilos de input/select padrão */
+    background-color: var(--primary-color) !important;
+    color: black !important;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    appearance: none; /* Remove a seta padrão */
+    width: 200px; /* Largura fixa */
+    
+    /* Adiciona a seta customizada */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23000' d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
+}
+
+/* ==================================== */
+/* 6. ESTILOS DE TABELA (DATA-TABLE) */
+/* ==================================== */
+
+.table-container {
+    overflow-x: auto;
+    background-color: var(--card-bg);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse; 
+    color: var(--text-color);
+    min-width: 700px;
+}
+
+.data-table th, .data-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.data-table th {
+    background-color: var(--secondary-bg); /* Fundo sutil para cabeçalho */
+    font-weight: 700;
+    font-size: 0.9em;
+    color: var(--secondary-text);
+    text-transform: uppercase;
+}
+
+/* Efeito Zebra (linhas alternadas) */
+.data-table tbody tr:nth-child(even) {
+    background-color: var(--table-alt-row);
+}
+
+/* Efeito Hover e Linha Selecionada */
+.data-table tbody tr:hover,
+.data-table tbody tr:has(input[type="radio"]:checked) {
+    background-color: var(--input-bg-hover);
+    cursor: pointer;
+}
+
+/* Estilo do Radio Button */
+.data-table input[type="radio"] {
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+/* ==================================== */
+/* 7. ESTILOS DE DASHBOARD (MÉTRICAS) */
+/* ==================================== */
+
+.dashboard-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.metric-card {
+    background-color: var(--primary-color); 
+    color: black; 
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.metric-label {
+    font-size: 0.9em;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.metric-value {
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+.quick-navigation {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.nav-button {
+    text-decoration: none;
+    padding: 15px 0;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: 600;
+    background-color: var(--card-bg); 
+    color: var(--text-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.2s;
+    border: 1px solid var(--border-color);
+}
+
+.nav-button:hover {
+    background-color: var(--input-bg-hover);
+}
+
+/* ==================================== */
+/* 8. ESTILOS ESPECÍFICOS: HISTÓRICO DE MOVIMENTAÇÕES */
+/* ==================================== */
+
+/* Ajuste do layout dos filtros (Mais largos e centralizados como no protótipo) */
+.toolbar-movimentacoes {
+    display: flex;
+    flex-wrap: wrap; /* Permite quebrar linha em telas menores */
+    gap: 20px;
+    align-items: flex-start; /* Alinha os botões ao topo dos filtros */
+}
+
+.filter-group-movimentacoes {
+    display: flex;
+    flex-grow: 1; /* Ocupa o máximo de espaço possível */
+    gap: 15px;
+}
+
+.select-movimentacoes {
+    /* Ajuste de largura para os selects, como no protótipo */
+    flex-grow: 1;
+    max-width: 350px; /* Limita a largura máxima para não ficarem gigantes */
+    font-size: 1.1em;
+    padding: 15px 20px; /* Mais padding para ficarem mais altos */
+    border-radius: 4px; /* Mais quadrado, como no protótipo */
+    font-weight: 700;
+}
+
+/* Remove a largura fixa do filtro padrão para usar a largura do flex-grow */
+.select-movimentacoes {
+    width: auto;
+}
+
+/* Tabela de Movimentações */
+.movimentacoes-table th,
+.movimentacoes-table td {
+    border-right: 1px solid var(--border-color); /* Linhas verticais */
+}
+
+.movimentacoes-table th:last-child,
+.movimentacoes-table td:last-child {
+    border-right: none; /* Remove a última linha vertical */
+}
+
+/* Coluna de Ações (✅ e ❌) */
+.col-actions {
+    width: 80px;
+    text-align: center;
+    border-right: none !important; /* Remove a linha vertical no lado direito */
+}
+
+.action-icon {
+    cursor: pointer;
+    margin: 0 5px;
+    font-size: 1.2em;
+    user-select: none;
+}
+
+.action-edit {
+    color: #4CAF50; /* Verde */
+}
+
+.action-delete {
+    color: #F44336; /* Vermelho */
+}
+
+/* Ajustes para telas pequenas (Responsividade) */
+@media (max-width: 768px) {
+    .filter-group-movimentacoes {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .select-movimentacoes {
+        max-width: 100%; /* Ocupa a largura total em telas pequenas */
+    }
+
+    .toolbar-movimentacoes {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .action-group {
+        flex-direction: column;
+        width: 100%;
+    }
+}
+
+/* ==================================== */
+/* 9. ESTILOS ESPECÍFICOS: TELA DE LOGIN */
+/* ==================================== */
+
+.login-page-body {
+    /* Centraliza o conteúdo na tela */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.login-header {
+    /* Posicionamento do Logo e Theme Switcher */
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    right: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login-header .logo {
+    /* Estilo do Logo GEARSTOCK (já deve estar no CSS global) */
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--text-color); /* Pode ser var(--primary-color) se for laranja */
+}
+
+/* Container principal do formulário */
+.login-container {
+    width: 100%;
+    max-width: 400px; /* Largura do formulário */
+    padding: 20px;
+}
+
+.login-form {
+    background-color: var(--card-bg); /* Fundo preto/escuro do card */
+    padding: 40px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Sombra escura no dark mode */
+    text-align: center;
+}
+
+.login-form h2 {
+    color: var(--text-color);
+    font-size: 1.5em;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+/* Inputs do Formulário */
+.login-form .input-group {
+    margin-bottom: 20px;
+}
+
+.login-form input {
+    /* Inputs pretos/escuros com bordas sutis, como no protótipo */
+    background-color: #000000; 
+    border: 1px solid #333;
+    color: var(--text-color);
+    padding: 15px 15px; /* Altura maior */
+    font-size: 1em;
+    border-radius: 4px;
+}
+
+.login-form input:focus {
+    border-color: var(--primary-color);
+}
+
+/* Botão Continuar */
+.btn-login {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1em;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+/* Links Adicionais (Cadastrar, Esqueci a Senha) */
+.login-links {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.login-links .link-secondary {
+    color: var(--secondary-text); /* Cor cinza sutil */
+    text-decoration: none;
+    font-size: 0.95em;
+    transition: color 0.2s;
+}
+
+.login-links .link-secondary:hover {
+    color: var(--primary-color);
+}
+
+/* No Dark Mode, ajusta o background do card */
+body.dark-mode .login-form {
+    background-color: #1f1f1f;
+}
+
+/* --- Estilo Específico para o Link de Sair (Logout) --- */
+
+.sidebar nav a.logout-link {
+    /* Empurra o botão de sair para baixo, se houver espaço */
+    margin-top: auto; 
+    /* Coloca o link no final da sidebar se for um flexbox */
+    /* Para a estrutura atual, apenas adicionamos uma margem superior */
+    padding-top: 20px;
+    border-top: 1px solid #ffffff1a; /* Linha separadora sutil */
+    color: #f44336; /* Cor vermelha para indicar saída/perigo */
+}
+
+.sidebar nav a.logout-link:hover {
+    background-color: #f443361a; /* Vermelho com transparência no hover */
+    color: #f44336;
+    border-left: 5px solid #f44336;
+    padding-left: 15px;
+}
